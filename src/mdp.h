@@ -1,26 +1,39 @@
 #ifndef MDP
 #define MDP
 
+#define REGISTER_SIZE   32U
+#define MS_CYCLES       2826U // IMPORTANT!!! Hardware dependent! Value for RK3308
+
 typedef unsigned char   uint8_t;
 typedef unsigned short  uint16_t;
 typedef unsigned int    uint32_t;
 
 typedef enum{
-    false = 0,
-    true = 1
-} bool;
+    low = 0,
+    high = 1
+} mdpBool;
 
 
 struct mdpPort{
     uint32_t gpioBaseAddress;
     uint8_t pinOffset;
+    uint32_t msCycles;
+    uint32_t period;
 };
 
-void mdpCreatePort(uint32_t gpioAdd, uint8_t pinOffs, struct mdpPort *port);
-
-void mdpSetPort(struct mdpPort port, bool value);
 
 
+void mdpWait(uint32_t milliseconds);
+
+void mdpCreatePort(uint32_t gpioAdd, uint8_t pinOffs, uint32_t msCycles, uint32_t period, struct mdpPort *port);
+
+void mdpSetPort(struct mdpPort port, mdpBool value);
+
+mdpBool mdpGetPort(struct mdpPort port);
+
+void mdpInitPort(struct mdpPort port);
+
+void mdpDisplayValue(struct mdpPort port, uint32_t value);
 
 
 
