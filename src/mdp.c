@@ -51,7 +51,7 @@ void mdpInitPort(struct mdpPort port){
     mdpSetPort(port, 1);
 }
 
-void mdpDisplayValue(struct mdpPort port, uint32_t value){
+void mdpBareDisplayValue(struct mdpPort port, uint32_t value){
     uint32_t i;
     mdpBool regBit;
     //Start communication 
@@ -73,5 +73,19 @@ void mdpDisplayValue(struct mdpPort port, uint32_t value){
     mdpSetPort(port, 0);
     mdpWait(port.period);
     mdpSetPort(port, 1);
+}
+// baudrate = 1/period(ms) , ex. period=1ms bd=1000bps
+void mdpUARTDisplayValue(struct mdpPort port, uint8_t value){
+    uint32_t i;
+    mdpBool regBit;
+
+    for(i = 0; i < UART_TOTAL_FRAME_BITS; i++){
+        //Start Bit
+        if(i < UART_START_BIT) mdpSetPort(port, 0);
+        else if(i <= UART_DATA_FRAME_BITS)  mdpSetPort(port, (value >> (i - 1)) & 0x01);
+        else if(i > UART_DATA_FRAME_BITS)  mdpSetPort(port, 1);
+        mdpWait(port.period);
+    }
+    
 }
 

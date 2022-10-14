@@ -1,8 +1,14 @@
 #ifndef MDP
 #define MDP
 
-#define REGISTER_SIZE   32U
-#define MS_CYCLES       2826U // IMPORTANT!!! Hardware dependent! Value for RK3308
+#define REGISTER_SIZE           32U
+#define MS_CYCLES               2826U // IMPORTANT!!! Hardware dependent! Value for RK3308
+
+
+#define UART_START_BIT          1U
+#define UART_DATA_FRAME_BITS    8U
+#define UART_STOP_BITS          1U
+#define UART_TOTAL_FRAME_BITS   UART_START_BIT + UART_DATA_FRAME_BITS + UART_STOP_BITS
 
 typedef unsigned char   uint8_t;
 typedef unsigned short  uint16_t;
@@ -33,8 +39,9 @@ mdpBool mdpGetPort(struct mdpPort port);
 
 void mdpInitPort(struct mdpPort port);
 
-void mdpDisplayValue(struct mdpPort port, uint32_t value);
+void mdpBareDisplayValue(struct mdpPort port, uint32_t value);
 
+void mdpUARTDisplayValue(struct mdpPort port, uint8_t value);
 
 
 #endif
