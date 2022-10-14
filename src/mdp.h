@@ -7,7 +7,7 @@
 
 #define UART_START_BIT          1U
 #define UART_DATA_FRAME_BITS    8U
-#define UART_STOP_BITS          1U
+#define UART_STOP_BITS          2U // 2 Stop bits improve the stability
 #define UART_TOTAL_FRAME_BITS   UART_START_BIT + UART_DATA_FRAME_BITS + UART_STOP_BITS
 
 typedef unsigned char   uint8_t;
