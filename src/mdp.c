@@ -89,3 +89,9 @@ void mdpUARTDisplayValue(struct mdpPort port, uint8_t value){
     
 }
 
+void mdpUARTPrint(struct mdpPort port, uint8_t* toPrint){
+    int i;
+    for(i = 0; toPrint[i] != '\0'; i++){
+        mdpUARTDisplayValue(port, toPrint[i]);
+    }
+}
