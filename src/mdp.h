@@ -43,7 +43,8 @@ void mdpBareDisplayValue(struct mdpPort port, uint32_t value);
 
 void mdpUARTDisplayValue(struct mdpPort port, uint8_t value);
 
-void mdpUARTPrint(struct mdpPort port, uint8_t* toPrint);
+void mdpUARTPrintString(struct mdpPort port, uint8_t* toPrint);
 
+void mdpUARTPrintWord(struct mdpPort port, uint32_t toPrint);
 
 #endif
